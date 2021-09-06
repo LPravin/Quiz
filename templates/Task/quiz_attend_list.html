@@ -1,0 +1,3 @@
+{% for quiz in quizzes %}
+    <a href={% url 'start quiz' quiz.pk %}>{{ quiz.name }}</a>
+{% endfor %}

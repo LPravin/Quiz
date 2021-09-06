@@ -1,0 +1,70 @@
+{% extends 'Base.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/add_edit_question.css' %}">
+{% endblock %}
+{% block content %}
+<form method="post"class="myTitle">
+{{ form.as_p }}
+        {% csrf_token %}
+    <button type="submit">SUBMIT AND NEXT</button>
+    </form>
+{% endblock %}
+{% block script %}
+    <script>
+$(document).ready(function(){
+    // const opt = $('#id_is_multiple_correct').val();
+});
+let opt = $('#id_is_multiple_correct');
+let choice = $(".choice");
+let f=0;
+
+// function uncheck(curr) {
+//     choice.prop('checked', false).not(curr);
+//
+// }
+
+
+opt.change(function (){
+    // alert('hello');
+    if (this.checked){
+        // $('#id_is_ans_option_1').attr('checked', 'unchecked');
+        f=1;
+    }
+    else{
+        // $('#id_is_ans_option_1').removeAttr('checked');
+             choice.prop('checked', false);
+             f=0;
+    }
+})
+
+
+$('#id_is_ans_option_1').change(function () {
+    if (f === 0){
+        $('.choice').not(this).prop('checked', false);
+    }
+
+})
+$('#id_is_ans_option_2').change(function () {
+    if (f === 0){
+        $('.choice').not(this).prop('checked', false);
+    }
+
+})
+$('#id_is_ans_option_3').change(function () {
+    if (f === 0){
+        $('.choice').not(this).prop('checked', false);
+    }
+
+})
+$('#id_is_ans_option_4').change(function () {
+    if (f === 0){
+        $('.choice').not(this).prop('checked', false);
+    }
+
+})
+</script>
+
+{% endblock %}

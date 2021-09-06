@@ -1,0 +1,34 @@
+
+            <div class="questions"><label>{{ question.num }}) {{ question.question }}</label><br>
+                <br>
+                {% if  question.is_multiple_correct == 1 %}
+    <input type="checkbox" id="option1" name="choice" value="option1">
+    <label for="option1">{{ question.option_1 }}</label><br>
+    <input type="checkbox" id="option2" name="choice" value="option2">
+    <label for="option2">{{ question.option_2 }}</label><br>
+    <input type="checkbox" id="option3" name="choice" value="option3">
+    <label for="option3">{{ question.option_3 }}</label><br>
+    <input type="checkbox" id="option4" name="choice" value="option4">
+    <label for="option4">{{ question.option_4 }}</label><br>
+                    <input type="checkbox" id="is_mul" checked hidden><br>
+                {% else %}
+                    <input type="radio" id="option1" name="choice" value="option1">
+    <label for="option1">{{ question.option_1 }}</label><br>
+    <input type="radio" id="option2" name="choice" value="option2">
+    <label for="option2">{{ question.option_2 }}</label><br>
+    <input type="radio" id="option3" name="choice" value="option3">
+    <label for="option3">{{ question.option_3 }}</label><br>
+    <input type="radio" id="option4" name="choice" value="option4">
+    <label for="option4">{{ question.option_4 }}</label><br>
+                    <input type="checkbox" id="is_mul" hidden><br>
+                {% endif %}
+            <label id="answer"></label>
+            <p id="description" hidden>{{ question.description }}</p><br><br>
+            </div>
+            <div style="overflow:auto;">
+                <div class="questions-footer">
+                <button id="next" class="nextBtn" hidden>Next</button>
+                <button id="submit" class="prevBtn" >Show Answer</button>
+{#                <button id="prevBtn" class="prevBtn">Previous</button>#}
+            </div>
+            </div>

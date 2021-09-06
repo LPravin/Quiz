@@ -1,0 +1,163 @@
+{% extends 'Base.html' %}
+{% load static %}
+{#<a href={% url 'add quiz' %}>Create Quiz</a>#}
+{#<a href={% url 'add quiz' %}>Quiz List</a>#}
+{#<a href={% url 'quiz attend list' %}>Open quiz to attend</a>#}
+{% block head %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome to Quiz App</title>
+        <link rel="stylesheet" href="{% static 'css/home.css' %}"/>
+{% endblock %}
+    {% block content %}
+
+       <nav>
+        <h1>Quiz App</h1>
+{% if user.is_authenticated %}
+{% if request.user.role == 1 %}
+    <ul>
+    <li>
+            <a href={% url 'logout' %}>Logout</a>
+    </li>
+    <li>
+            <a href={% url 'add quiz' %}>Create Quiz</a>
+    </li>
+    <li>
+            <a>Hi {{ user.username }}</a>
+    </li>
+    </ul>
+{% elif request.user.role == 2 %}
+    <ul>
+    <li>
+            <a href={% url 'logout' %}>Logout</a>
+    </li>
+    <li>
+            <a>Hi {{ user.username }}</a>
+    </li>
+    </ul>
+    {% else %}
+    <ul>
+    <li>
+            <a href={% url 'logout' %}>Logout</a>
+    </li>
+    <li>
+            <a href={% url 'admin:index' %}>Admin</a>
+    </li>
+    <li>
+            <a>Hi {{ user.username }}</a>
+    </li>
+    </ul>
+{% endif %}
+{% else %}
+    <ul>
+    <li>
+            <a href={% url 'admin:index' %}>Admin</a>
+        </li>
+        <li>
+            <a class="myBtn" href="#">Student Signup</a>
+        </li>
+        <li>
+            <a class="myBtn" href="#">Login</a>
+        </li>
+
+   </ul>
+{% endif %}
+       </nav>
+        {% if user.is_authenticated %}
+            {% if request.user.role == 1 %}
+                <div class="container1">
+             {% for quiz in quizzes %}
+                    <div class="responses">
+    <a href={% url 'update quiz' quiz.pk %}><h3 style="align-content: center">{{ quiz.name }}</h3></a>
+                    </div>
+                    <br>
+                {% endfor %}
+        </div>
+            {% elif request.user.role == 2 %}
+                <div class="container1">
+                {% for quiz in quizzes %}
+                    <div class="responses">
+    <a href={% url 'start quiz' quiz.pk %}><h3 style="align-content: center">{{ quiz.name }}</h3></a>
+                    </div>
+                    <br>
+                {% endfor %}
+                </div>
+                {% endif %}
+        {% else %}
+       <div class="skewbox">
+        <div class="container">
+          <p>
+          <span class="heading">Create a quiz that engages students, generates leads or promotes your brand.</span><br>
+          <br>  The online quiz maker that's easy to use, fun and fully customizable.
+
+          </p>
+{#          <button class="quiz-btn">MAKE YOUR OWN QUIZ</button><span class="free">for free</span>#}
+          </div>
+          <div class="imgbox">
+          <img src="{% static 'images/online-quiz.jpg' %}" alt="quiz image" width="520" height="480"/>
+          </div>
+          </div>
+    <!-- Signup Modal -->
+        <div id="modal-signup" class="modal">
+        <div class="modal-signup-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Sign Up</h2>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="{% url 'student signup' %}">
+          <div class="user-details">{{ form.username }}</div>
+                <p style="color: darkred">{{ form.username.errors }}</p>
+          <div  class="user-details">{{ form.password1 }}</div>
+          <div  class="user-details"> {{ form.password2 }}</div>
+                {% csrf_token %}
+          <div  class="user-details"> <input type="submit" value="CREATE ACCOUNT"/></div>
+          </form>
+          </div>
+          </div>
+          </div>
+        <!-- login Modal -->
+           <div id="modal-login" class="modal">
+            <div class="modal-login-content">
+              <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Sign In</h2>
+              </div>
+              <div class="modal-body">
+                <form method="post" action="{% url 'user login' %}">
+              <div  class="user-details"><input name="username" type="text" placeholder="Username" required/></div>
+              <div  class="user-details"> <input name="password" type="password" placeholder="Password" required/></div>
+                    {% csrf_token %}
+              <div  class="user-details"> <input type="submit" value="LOGIN"/></div>
+              </form>
+              </div>
+              </div>
+          </div>
+        {% endif %}
+{% endblock %}
+{% block script %}
+    <script>
+        var modal = document.getElementsByClassName("modal");
+        var btn = document.getElementsByClassName("myBtn");
+        var span = document.getElementsByClassName("close");
+        btn[0].onclick = function() {
+          modal[0].style.display = "block";
+        }
+        btn[1].onclick = function() {
+          modal[1].style.display = "block";
+        }
+        span[0].onclick = function() {
+          modal[0].style.display = "none";
+        }
+        span[1].onclick = function() {
+          modal[1].style.display = "none";
+        }
+        window.onclick = function(event) {
+          if (event.target === modal[0]) {
+            modal[0].style.display = "none";
+          }
+          if (event.target === modal[1]) {
+            modal[1].style.display = "none";
+          }
+        }
+    </script>
+        {% endblock %}

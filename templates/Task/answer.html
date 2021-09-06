@@ -1,0 +1,35 @@
+{% if question.is_multiple_correct == 1 %}
+{% if result == "CORRECT" %}
+        <p style="color: darkgreen;">YES THAT'S CORRECT</p>
+    {% else %}
+        <p style="color: darkred;">OOPS THAT'S INCORRECT</p>
+    <p>Correct answer is</p>
+    {% if question.is_ans_option_1 == 1 %}
+             <p>{{ question.option_1 }}</p>
+        {% endif %}
+    {% if question.is_ans_option_2 == 1 %}
+        <p>{{ question.option_2 }}</p>
+        {% endif %}
+    {% if question.is_ans_option_3 == 1 %}
+            <p>{{ question.option_3 }}</p>
+        {% endif %}
+    {% if question.is_ans_option_4 == 1 %}
+            <p>{{ question.option_4 }}</p>
+    {% endif %}
+        {% endif %}
+{% else %}
+    {% if result == "CORRECT" %}
+        <p style="color: darkgreen;">YES THAT'S CORRECT</p>
+    {% else %}
+        <p style="color: darkred;">OOPS THAT'S INCORRECT</p>
+    {% if question.is_ans_option_1 == 1 %}
+            <p>Correct answer is {{ question.option_1 }}</p>
+    {% elif question.is_ans_option_2 == 1 %}
+        <p>Correct answer is {{ question.option_2 }}</p>
+    {% elif question.is_ans_option_3 == 1 %}
+            <p>Correct answer is {{ question.option_3 }}</p>
+    {% elif question.is_ans_option_4 == 1 %}
+            <p>Correct answer is {{ question.option_4 }}</p>
+    {% endif %}
+        {% endif %}
+{% endif %}

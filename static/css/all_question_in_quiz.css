@@ -1,0 +1,13 @@
+.myTitle{
+    position: absolute;
+    left:50%;
+    transform: translate(-50%, -50%);
+    margin-top:10%;
+    text-align: center;
+    color:black;
+    border:none;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    background: white;
+    width:600px;
+}

@@ -1,0 +1,70 @@
+{% extends 'Base.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/all_question_in_quiz.css' %}">
+{% endblock %}
+{% block content %}
+<table class="myTitle">
+              <thead >
+                <tr >
+                  <th scope="col" style="text-align: left; padding:20px 20px;background: #808080; color:#fff;">QUIZ</th>
+                    <th scope="col" style="text-align: left; padding:20px 20px;background: #808080; color:#fff;" >QUESTION</th>
+                  <th scope="col" style="text-align: left; padding:20px 20px;background: #808080; color:#fff;" >ACTION</th>
+                </tr>
+              </thead>
+            <tbody id="question_list">
+{% if questions %}
+{% for q in questions %}
+                <tr>
+                  <td style="text-align: left; padding:20px 8px;"> {{ forloop.counter }}</td>
+                    <td style="text-align: left; padding:20px 8px;"> {{ q.question }}</td>
+                     <td>
+                          <input type="button" onclick="location.href='{% url 'update question' q.id %}'" value="Edit" id="edit"
+                                 style="color: white; background-color: gray">
+                          <input type="button" onclick="location.href='{% url 'delete question' q.id %}'" value="Delete" id="delete"
+                                 style="color: white; background-color: dimgray">
+                     </td>
+                </tr>
+
+{% endfor %}
+{% else %}
+    <tr>
+   <td colspan="9" style="text-align: center;font-size: large;padding:30px;">
+   NO QUESTIONS
+   </td>
+    </tr>
+{% endif %}
+{% if add_ques == 1 %}
+<td></td>
+{#<td><button type="button" onclick="{% url 'add questions' %}">ADD QUESTION</button></td>#}
+<td><button type="button" onclick="location.href='{% url 'add questions' %}'">ADD QUESTION</button></td>
+<td><button type="button" onclick="location.href='{% url 'home' %}'">HOME</button></td>
+{% else %}
+<td></td>
+<td></td>
+<td><button type="button" onclick="location.href='{% url 'home' %}'">HOME</button></td>
+{% endif %}
+{#    <td>#}
+{#    <button type="button" onclick="{% url 'add questions' %}">ADD QUESTION</button>#}
+{#    </td>#}
+            </tbody>
+</table>
+{#   <div id="modal-question" class="modal">#}
+{#            <div class="modal-question-content">#}
+{#              <div class="modal-header">#}
+{#                <span class="close" id="close">&times;</span>#}
+{#                <h2>Sign In</h2>#}
+{#              </div>#}
+{#              <div class="modal-body">#}
+{#                <form method="post">#}
+{#              <div  class="user-details"><input name="username" type="text" placeholder="Username" required/></div>#}
+{#              <div  class="user-details"> <input name="password" type="password" placeholder="Password" required/></div>#}
+{#                    {% csrf_token %}#}
+{#              <div  class="user-details"> <input type="submit" id="submit" value="LOGIN"/></div>#}
+{#              </form>#}
+{#              </div>#}
+{#              </div>#}
+{#          </div>#}
+{% endblock %}

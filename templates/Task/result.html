@@ -1,0 +1,17 @@
+{% include 'Base.html' %}
+{% load static %}
+{% block head %}
+     <link rel="stylesheet" href="{% static 'css/quiz_start_home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="myTitle">
+            <h1>QUIZ ONLINE TEST</h1>
+        </div>
+        <div class="info">
+          <div class="warning">  <h3>RESULT</h3></div>
+            <p>You scored {{ request.session.marks }}/{{ request.session.total_questions }} Marks</p>
+            <p id="time"> </p>
+            <a href="{% url 'home' %}"><Button>Home</Button></a>
+        </div>
+{% endblock %}

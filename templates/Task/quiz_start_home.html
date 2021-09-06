@@ -1,0 +1,20 @@
+{% include 'Base.html' %}
+{% load static %}
+{% block head %}
+     <link rel="stylesheet" href="{% static 'css/quiz_start_home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="myTitle">
+            <h1>QUIZ ONLINE TEST</h1>
+        </div>
+        <div class="info">
+          <div class="warning">  <h3>WARNING</h3></div>
+            <p>1. You must submit the answer to see the next question.<br>
+               2. There will be both single valued and multi-valued answer.
+                </p>
+            <p style="color: midnightblue; font-weight: bold; text-align: center" >GOOD LUCK</p>
+
+            <a href={% url 'attend quiz' %}><Button>Start Quiz</Button></a>
+        </div>
+{% endblock %}
