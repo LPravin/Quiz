@@ -1,17 +1,69 @@
 .myTitle{
-    position: absolute;
-    left:50%;
-    transform: translate(-50%, -50%);
-    margin-top:20%;
+
+    margin-left:30%;
+    margin-top:5%;
     text-align: center;
     color:black;
     border:none;
     border-radius: 5px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     background: white;
-    width:600px;
+    max-width:600px;
+    display:flex;
+    flex-direction:column;
+
+}
+.myTitle h1{
+    text-align:center;
+    font-weight:bold;
+    padding:20px;
+    color:#0096ff;
+    text-decoration:underline;
 }
 textarea {
   width: 300px;
   height: 50px;
+  border-radius:4px;
 }
+.myTitle p{
+    display:flex;
+    flex-direction:row;
+
+}
+p label{
+    width:250px;
+    text-align:left;
+    padding:5px;
+    margin-left:3%;
+}
+p input{
+    padding:5px;
+}
+.myTitle button{
+    padding:10px;
+    /*margin-bottom:20px;*/
+    background:#0096ff;
+    border-radius:4px;
+    border:none;
+    color:#fff;
+    font-weight:bolder;
+    margin:5% 35% 10%;
+    cursor:pointer;
+}
+.myTitle button:hover{
+    background:blue;
+}
+
+ @media only screen and (max-width: 600px){
+     .myTitle{
+         width:100%;
+         margin:3% 0 0;
+     }
+     p input, textarea{
+         margin-right:2%;
+     }
+     .myTitle button{
+         margin: 5% 15% 10%;
+     }
+
+ }

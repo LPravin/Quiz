@@ -6,7 +6,9 @@
 <link rel="stylesheet" href="{% static 'css/add_edit_question.css' %}">
 {% endblock %}
 {% block content %}
-<form method="post"class="myTitle">
+
+<form method="post" class="myTitle">
+    <h1 id="mytitle">ADD/EDIT QUESTION</h1>
 {{ form.as_p }}
         {% csrf_token %}
     <button type="submit">SUBMIT AND NEXT</button>

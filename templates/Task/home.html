@@ -28,10 +28,10 @@
 {% elif request.user.role == 2 %}
     <ul>
     <li>
-            <a href={% url 'logout' %}>Logout</a>
+            <a class="name" href={% url 'logout' %}>Logout</a>
     </li>
     <li>
-            <a>Hi {{ user.username }}</a>
+            <a class="name">Hi {{ user.username }} !</a>
     </li>
     </ul>
     {% else %}
@@ -66,8 +66,8 @@
             {% if request.user.role == 1 %}
                 <div class="container1">
              {% for quiz in quizzes %}
-                    <div class="responses">
-    <a href={% url 'update quiz' quiz.pk %}><h3 style="align-content: center">{{ quiz.name }}</h3></a>
+                    <div class="responses" style="background:#f5f5f5;">
+                         <a href={% url 'update quiz' quiz.pk %}><h3 style="align-content:center;">{{ quiz.name }}</h3></a>
                     </div>
                     <br>
                 {% endfor %}
@@ -76,7 +76,7 @@
                 <div class="container1">
                 {% for quiz in quizzes %}
                     <div class="responses">
-    <a href={% url 'start quiz' quiz.pk %}><h3 style="align-content: center">{{ quiz.name }}</h3></a>
+    <a href={% url 'start quiz' quiz.pk %}><h3 style="align-content: center;">{{ quiz.name }}</h3></a>
                     </div>
                     <br>
                 {% endfor %}

@@ -1,13 +1,84 @@
-.myTitle{
-    position: absolute;
-    left:50%;
-    transform: translate(-50%, -50%);
-    margin-top:10%;
-    text-align: center;
-    color:black;
+
+.myTable{
+    margin-left:30%;
+    margin-top:3%;
     border:none;
     border-radius: 5px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    background: white;
-    width:600px;
+    background: #fff;
+    max-width:670px;
+    height:auto;
+    display:flex;
+    flex-direction:column;
+
+}
+.myTable h1{
+    color:#0096ff;
+    text-align:center;
+    text-transform:uppercase;
+}
+.myTable table{
+    background:#fff;
+
+}
+table thead th{
+   background:#264e86;
+   text-align: center;
+   padding:20px 20px;
+   color:#fff;
+}
+
+table tbody tr{
+    background:#f2f2f2;
+
+}
+table tbody tr td{
+    padding:20px 8px;
+    text-align:left;
+    color:#000;
+}
+table tbody tr td input[type="button"]{
+    padding:5px;
+    border-radius:5px;
+    font-weight:bold;
+    cursor:pointer;
+}
+table tbody tr td input[type="button"]:hover{
+    background:#0096ff;
+    color:#fff;
+    border:1px solid #0096ff;
+    border-radius:4px;
+}
+.myTable button{
+    margin:10px 10px 20px 500px;
+    padding:10px 3px;
+    color:#fff;
+    font-weight:bolder;
+    background: #0096ff;
+    border:none;
+    cursor:pointer;
+    border-radius:4px;
+}
+.myTable button:hover{
+    background:#264e86;
+}
+
+
+@media only screen and (max-width: 600px){
+
+    .myTable{
+
+        margin:0;
+        width:100%;
+
+    }
+    table tbody tr td input[type="button"]{
+        margin-bottom:7px;
+
+    }
+    .myTable button{
+        margin-left:300px;
+
+
+    }
 }
