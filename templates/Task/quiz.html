@@ -1,13 +1,19 @@
 {% extends 'Base.html' %}
+{% load static %}
+{% block head %}
 
-{% block title %}
-    CREATE QUIZ
+        <title>Create Quiz</title>
+        <link rel="stylesheet" href="{% static 'css/home.css' %}"/>
 {% endblock %}
+
 {% block content %}
+<div class="quiz-title">
     <h1>QUIZ DETAILS</h1>
     <form method="post">
-    {{ form }}
+        <p>Enter the name of the title</p>
+         {{ form }}
         {% csrf_token %}
     <button type="submit">SUBMIT AND NEXT</button>
     </form>
+    </div>
 {% endblock %}

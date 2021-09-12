@@ -5,16 +5,16 @@
 {% endblock %}
 
 {% block content %}
-<div class="quiz-page" style="width:auto;height:auto;">
+{#<div class="quiz-page" style="width:auto;height:auto;">#}
 <div class="myTitle">
             <h1>QUIZ ONLINE TEST</h1>
         </div>
         <div class="info">
           <div class="warning">  <h3>RESULT</h3></div>
-            <p>You scored {{ request.session.marks }}/{{ request.session.total_questions }} Marks</p>
+            <p>You scored {{ correct_answers }}/{{ total_questions }} Marks</p>
             <p id="time"> </p>
             <a href="{% url 'home' %}"><Button>Home</Button></a>
         </div>
-</div>
+{#</div>#}
 
 {% endblock %}

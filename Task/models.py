@@ -19,9 +19,15 @@ class MyUser(AbstractUser):
 class Quiz(models.Model):
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name_plural = 'Quizzes'
+
 
 class Question(models.Model):
-    quiz_ref = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    quiz_ref = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quiz_reference')
     num = models.SmallIntegerField()
     question = models.CharField(max_length=300)
     option_1 = models.CharField(max_length=50)
@@ -34,3 +40,12 @@ class Question(models.Model):
     is_ans_option_3 = models.BooleanField(default=False)
     is_ans_option_4 = models.BooleanField(default=False)
     description = models.CharField(max_length=200)
+
+
+class AnswerEntries(models.Model):
+    ques_ref = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='ques_reference')
+    user_ref = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='user_reference')
+    whether_answered_right = models.BooleanField()
+
+    class Meta:
+        verbose_name_plural = 'Answer Entries'

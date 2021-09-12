@@ -9,7 +9,7 @@
     <div class="test-questions" id="result">
 
         <div class="quiz-title">
-           <h2>CRICKET</h2>
+           <h2>{{ question.quiz_ref.name }}</h2>
         </div>
 
         <div class="header">
@@ -19,7 +19,8 @@
                <hr style="height: 2px"/>
             </div>
         <div id="question-content">
-            <div class="questions"><label>{{ question.num }}) {{ question.question }}</label><br>
+        <div id="question-body">
+            <div class="questions"><label> {{ question.question }}</label><br>
                 <br>
                 {% if  question.is_multiple_correct == 1 %}
     <input type="checkbox" id="option1" name="choice" value="option1">
@@ -45,6 +46,7 @@
             <label id="answer"></label>
             <p id="description" hidden>{{ question.description }}</p><br><br>
             </div>
+        </div>
             <div style="overflow:auto;">
                 <div class="questions-footer">
                 <button id="next" class="nextBtn" hidden>Next</button>
@@ -110,11 +112,13 @@ $(Document).on('click', '#submit', function () {
     }
 });
 $(Document).on('click', '#next', function () {
+    $('#next').attr('hidden', 'true');
     $.ajax({
                 url: {% url 'next question' %},
                 success: function (data) {
                     if (data.next_question) {
-                        $('#question-content').html(data.question);
+                        $('#question-body').html(data.question);
+                        $('#submit').removeAttr('hidden');
                     }
                     else{
                         cleanInt();

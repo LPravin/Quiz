@@ -1,5 +1,3 @@
-# from django.core.serializers import json
-from django.db.models.fields import json
 from django.shortcuts import render, redirect, HttpResponse
 from django.http import JsonResponse
 from django.template.loader import render_to_string
@@ -128,7 +126,6 @@ def start_quiz(request, pk):
     request.session['quiz_id'] = pk
     request.session['marks'] = 0
     tq = Question.objects.filter(quiz_ref=pk).count()
-    request.session['total_questions'] = tq
     if tq == 0:
         return HttpResponse('OOPS NO QUESTION IS HERE')
     else:
@@ -155,7 +152,10 @@ def next_question(request):
         data['question'] = render_to_string('Task/question_content.html', context, request)
     else:
         data['next_question'] = False
-        data['result'] = render_to_string('Task/result.html', request=request)
+        total_questions = Question.objects.filter(quiz_ref=quiz_id).count()
+        correct_answers = AnswerEntries.objects.filter(whether_answered_right=True, ques_ref__quiz_ref=quiz_id).count()
+        context = {'total_questions': total_questions, 'correct_answers': correct_answers}
+        data['result'] = render_to_string('Task/result.html', context, request=request)
     return JsonResponse(data)
 
 
@@ -164,6 +164,7 @@ def show_result(request):
 
 
 def show_answer(request):
+    user = request.user
     que_id = request.session['question_id']
     question = Question.objects.get(pk=que_id)
     if question.is_multiple_correct:
@@ -227,5 +228,9 @@ def show_answer(request):
             else:
                 result = "WRONG"
     if result == "CORRECT":
-        request.session['marks'] = request.session['marks'] + 1
+        AnswerEntries.objects.update_or_create(ques_ref=question, user_ref=user,
+                                               defaults={'whether_answered_right': True})
+    else:
+        AnswerEntries.objects.update_or_create(ques_ref=question, user_ref=user,
+                                               defaults={'whether_answered_right': False})
     return render(request, 'Task/answer.html', {'question': question, 'result': result})

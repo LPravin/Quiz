@@ -25,6 +25,7 @@
             <a>Hi {{ user.username }}</a>
     </li>
     </ul>
+
 {% elif request.user.role == 2 %}
     <ul>
     <li>
@@ -66,8 +67,8 @@
             {% if request.user.role == 1 %}
                 <div class="container1">
              {% for quiz in quizzes %}
-                    <div class="responses" style="background:#f5f5f5;">
-                         <a href={% url 'update quiz' quiz.pk %}><h3 style="align-content:center;">{{ quiz.name }}</h3></a>
+                    <div class="responses">
+                         <a href={% url 'update quiz' quiz.pk %}><h4>{{ quiz.name }}</h4></a>
                     </div>
                     <br>
                 {% endfor %}
@@ -76,7 +77,7 @@
                 <div class="container1">
                 {% for quiz in quizzes %}
                     <div class="responses">
-    <a href={% url 'start quiz' quiz.pk %}><h3 style="align-content: center;">{{ quiz.name }}</h3></a>
+                     <a href={% url 'start quiz' quiz.pk %}><h4 >{{ quiz.name }}</h4></a>
                     </div>
                     <br>
                 {% endfor %}
@@ -132,32 +133,87 @@
               </div>
               </div>
           </div>
+
         {% endif %}
+
+
+         <!-- create quiz -->
+          <!-- <div id="modal-quiz" class="modal">-->
+          <!--  <div class="modal-quiz-content">-->
+          <!--    <div class="modal-header">-->
+          <!--      <span class="close">&times;</span>-->
+          <!--      <h2>Sign In</h2>-->
+          <!--    </div>-->
+          <!--    <div class="modal-body">-->
+          <!--      <form method="post" >-->
+          <!--    <div  class="user-details"><label>Enter the title of the quiz</label></div>-->
+          <!--    <div  class="user-details"> <input name="title" type="text" required/></div>-->
+          <!--          {% csrf_token %}-->
+          <!--    <div  class="user-details"> <input type="submit" value="LOGIN"/></div>-->
+          <!--    </form>-->
+          <!--    </div>-->
+          <!--    </div>-->
+          <!--</div>-->
+
+
+
+
+
 {% endblock %}
 {% block script %}
     <script>
-        var modal = document.getElementsByClassName("modal");
-        var btn = document.getElementsByClassName("myBtn");
-        var span = document.getElementsByClassName("close");
-        btn[0].onclick = function() {
-          modal[0].style.display = "block";
-        }
-        btn[1].onclick = function() {
-          modal[1].style.display = "block";
-        }
-        span[0].onclick = function() {
-          modal[0].style.display = "none";
-        }
-        span[1].onclick = function() {
-          modal[1].style.display = "none";
-        }
-        window.onclick = function(event) {
-          if (event.target === modal[0]) {
-            modal[0].style.display = "none";
-          }
-          if (event.target === modal[1]) {
-            modal[1].style.display = "none";
-          }
-        }
+           var modal = document.getElementsByClassName('modal');
+
+            // Get the button that opens the modal
+            var btn = document.getElementsByClassName("myBtn");
+
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close");
+
+            // When the user clicks the button, open the modal
+            btn[0].onclick = function() {
+                modal[0].style.display = "block";
+            }
+
+            btn[1].onclick = function() {
+                modal[1].style.display = "block";
+            }
+
+            // btn[2].onclick = function(){
+            //     modal[2].style.display = "block";
+            // }
+
+
+            // When the user clicks on <span> (x), close the modal
+            span[0].onclick = function() {
+                modal[0].style.display = "none";
+            }
+
+
+            span[1].onclick = function() {
+                modal[1].style.display = "none";
+            }
+
+            // span[2].onclick = function() {
+            //     modal[2].style.display = "none";
+            // }
+
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal[0]) {
+                     modal[0].style.display = "none";
+                 }
+                if (event.target == modal[1]) {
+                     modal[1].style.display = "none";
+                 }
+                // if (event.target == modal[2]) {
+                //      modal[2].style.display = "none";
+                //  }
+
+            }
+
+
     </script>
         {% endblock %}
